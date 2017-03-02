@@ -2,7 +2,6 @@
 
 import UIKit
 
-var str = "Hello, playground"
 /*
  递归算法是一种直接或者间接地调用自身算法的过程。在计算机编写程序中，递归算法对解决一大类问题是十分有效的，它往往使算法的描述简洁而且易于理解。
  递归算法解决问题的特点：
@@ -51,27 +50,24 @@ let char: String = "dfadfdas"
 
 //char[1]
 
+var str = ""
+var numArr = [Int]()
 
-func numbconv(_ s:inout Character ,_ n:Int, _ b:Int) {
+func changeTwo(_ i:Int) -> String {
     
-//    var len = 0
-//    
-//    if n == 0 {
-//        s = ""
-//        return
-//    }
-//    
-//    /* figure out first n-1 digits */
-//    numbconv(&s, n/b, b);
-//    /* add last digit */
-//    len = s.lengthOfBytes(using: .utf8)
-//    s[1] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"[n%b];
-//
-//    
-//    return
+    if i == 0 {
+        for s in numArr {
+            str += String(s)
+        }
+        return str
+    }
+    
+    numArr.insert(i%2, at:0)
+    return changeTwo(i/2)
+
 }
 
-
+print(changeTwo(10))
 
 
 
