@@ -1,2 +1,2 @@
-# jadefan.github.io
-Blog
+# 算法练习
+算法基础练习
