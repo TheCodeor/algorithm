@@ -2,77 +2,98 @@
 
 import UIKit
 
+//桶排序 时间复杂度O(M+N) M为桶的个数 N为待排序的个数
 /*
- 递归算法是一种直接或者间接地调用自身算法的过程。在计算机编写程序中，递归算法对解决一大类问题是十分有效的，它往往使算法的描述简洁而且易于理解。
- 递归算法解决问题的特点：
- (1) 递归就是在过程或函数里调用自身。
- (2) 在使用递归策略时，必须有一个明确的递归结束条件，称为递归出口。
- (3) 递归算法解题通常显得很简洁，但递归算法解题的运行效率较低。所以一般不提倡用递归算法设计程序。
- (4) 在递归调用的过程当中系统为每一层的返回点、局部量等开辟了栈来存储。递归次数过多容易造成栈溢出等。所以一般不提倡用递归算法设计程序。
- 
- 要求
- 递归算法所体现的“重复”一般有三个要求：
- 一是每次调用在规模上都有所缩小(通常是减半)；
- 二是相邻两次重复之间有紧密的联系，前一次要为后一次做准备(通常前一次的输出就作为后一次的输入)；
- 三是在问题的规模极小时必须用直接给出解答而不再进行递归调用，因而每次递归调用都是有条件的(以规模未达到直接解答的大小为条件)，无条件递归调用将会成为死循环而不能正常结束。
- 
- 如何设计递归算法
- 1.确定递归公式
- 2.确定边界(终了)条件
- 
+var a = Array(repeating: 0, count: 11)
+
+var input = [5, 3, 5, 2, 8]
+for t in input {
+    a[t] += 1
+}
+
+for (index, value) in a.enumerated().reversed() {
+
+    if value != 0 {
+        for j in 1...value {
+            print(index)
+        }
+    }
+}
 */
 
-//斐波纳契数列，又称黄金分割数列，指的是这样一个数列：1、1、2、3、5、8、13、21、……
-func foo(_ i:Int) -> Int {
-    
-    if i <= 0 {
-        return 0
-    } else if (i > 0 && i <= 2) {
-        return 1
-    } else {
-        return foo(i - 1) + foo(i - 2)
-    }
+//冒泡排序 时间复杂度是 O(N2)
+/*
+struct Student {
+    var name = ""
+    var score = 0
 }
 
-//print(foo(3))
+var a = [Student(name: "huhu", score: 5),
+         Student(name: "haha", score: 3),
+         Student(name: "xixi", score: 5),
+         Student(name: "hengheng", score: 2),
+         Student(name: "gaoshou", score: 8)]
+var t = Student()
 
-//计算n!可用递归公式如下 阶乘
-func fac(_ i:Int) -> Int {
-    if i == 0 {
-        return 1;
-    } else {
-        return i*fac(i - 1)
-    }
-}
-
-//print(fac(5))
-let char: String = "dfadfdas"
-
-//char[1]
-
-var str = ""
-var numArr = [Int]()
-
-func changeTwo(_ i:Int) -> String {
-    
-    if i == 0 {
-        for s in numArr {
-            str += String(s)
+for i in 0...a.count - 1 {
+    for j in 0...a.count - 2 {
+        if a[j].score < a[j+1].score {
+            t = a[j]
+            a[j] = a[j+1]
+            a[j+1] = t
         }
-        return str
     }
-    
-    numArr.insert(i%2, at:0)
-    return changeTwo(i/2)
-
 }
 
-print(changeTwo(10))
+for student in a {
+    print(student.name)
+}
+*/
 
+//快速排序 平均时间复杂度为 O(NlogN)
 
+var a = [10, 8, 4, 3, 6, 5, 7, 2, 9, 1]
 
+func quicksort(left: Int, right: Int) {
+    
+    var i = 0
+    var j = 0
+    var t = 0
+    var temp = 0
+    
+    if left > right {
+        return;
+    }
+    
+    temp = a[left]
+    i = left
+    j = right
+    
+    while i != j {
+        while a[j] >= temp && i < j {
+            j -= 1
+        }
+        
+        while a[i] <= temp && i < j {
+            i += 1
+        }
+        
+        if i < j {
+            t = a[i]
+            a[i] = a[j]
+            a[j] = t
+        }
+    }
+    
+    a[left] = a[i]
+    a[i] = temp
+    
+    quicksort(left: left, right: i - 1)
+    quicksort(left: i + 1, right: right)
+}
 
-
+quicksort(left: 0, right: 9)
+print(a)
 
 
 
